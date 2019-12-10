@@ -26,11 +26,12 @@ namespace GoPlaces.Models
                 return this.FirstName + " " + this.LastName;
             }
         }
+
+        [Key]
         [Required]
         [Display(Name ="@username")]
         public string Username { get; set; }
-        public virtual ICollection<Place> Places { get; set; }
-        public virtual ICollection<Adventure> Adventures { get; set; }
+        public ICollection<Adventure> Adventures { get; set; }
         public bool ShouldGoToLatestAdventure { get; set; }
     }
 }
