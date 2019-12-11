@@ -54,8 +54,8 @@ namespace GoPlaces.Areas.Identity.Pages.Account
             public string LastName { get; set; }
 
             [Required]
-            [Display(Name = "@username")]
-            public string Username { get; set; }
+            [Display(Name = "User Handle")]
+            public string UserHandle { get; set; }
 
             [Required]
             [EmailAddress]
@@ -91,7 +91,7 @@ namespace GoPlaces.Areas.Identity.Pages.Account
                     Email = Input.Email,
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
-                    Username = Input.Username
+                    UserHandle = Input.UserHandle
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
 

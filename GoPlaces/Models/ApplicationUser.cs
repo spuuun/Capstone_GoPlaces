@@ -29,8 +29,8 @@ namespace GoPlaces.Models
 
         [Key]
         [Required]
-        [Display(Name ="@username")]
-        public string Username { get; set; }
+        [Display(Name ="User Handle")]
+        public string UserHandle { get; set; }
         public ICollection<Adventure> Adventures { get; set; }
         public bool ShouldGoToLatestAdventure { get; set; }
     }
