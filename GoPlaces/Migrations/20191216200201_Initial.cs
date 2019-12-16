@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GoPlaces.Migrations
 {
-    public partial class Initial1 : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -76,7 +76,7 @@ namespace GoPlaces.Migrations
                 name: "Adventures",
                 columns: table => new
                 {
-                    PlaceId = table.Column<int>(nullable: false)
+                    AdventureId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(nullable: false),
                     Description = table.Column<string>(nullable: true),
@@ -86,7 +86,7 @@ namespace GoPlaces.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Adventures", x => x.PlaceId);
+                    table.PrimaryKey("PK_Adventures", x => x.AdventureId);
                     table.ForeignKey(
                         name: "FK_Adventures_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -200,7 +200,7 @@ namespace GoPlaces.Migrations
                         name: "FK_Places_Adventures_AdventureId",
                         column: x => x.AdventureId,
                         principalTable: "Adventures",
-                        principalColumn: "PlaceId",
+                        principalColumn: "AdventureId",
                         onDelete: ReferentialAction.Cascade);
                 });
 

@@ -21,7 +21,7 @@ namespace GoPlaces.Migrations
 
             modelBuilder.Entity("GoPlaces.Models.Adventure", b =>
                 {
-                    b.Property<int>("PlaceId")
+                    b.Property<int>("AdventureId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -44,7 +44,7 @@ namespace GoPlaces.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("PlaceId");
+                    b.HasKey("AdventureId");
 
                     b.HasIndex("UserId");
 

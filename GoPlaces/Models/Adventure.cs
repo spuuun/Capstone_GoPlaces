@@ -10,7 +10,10 @@ namespace GoPlaces.Models
     public class Adventure
     {
         [Key]
-        public int PlaceId { get; set; }
+        public int AdventureId { get; set; }
+
+        //public int? PlaceId { get; set; }
+
         [Required]
         public string Title { get; set; }
         public string Description { get; set; }

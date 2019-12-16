@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoPlaces.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191211161617_Initial1")]
-    partial class Initial1
+    [Migration("20191216200201_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,7 @@ namespace GoPlaces.Migrations
 
             modelBuilder.Entity("GoPlaces.Models.Adventure", b =>
                 {
-                    b.Property<int>("PlaceId")
+                    b.Property<int>("AdventureId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -46,7 +46,7 @@ namespace GoPlaces.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("PlaceId");
+                    b.HasKey("AdventureId");
 
                     b.HasIndex("UserId");
 
