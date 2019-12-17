@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoPlaces.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191216200201_Initial")]
+    [Migration("20191216204613_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

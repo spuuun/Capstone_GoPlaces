@@ -54,9 +54,9 @@ namespace GoPlaces.Controllers
         // GET: Adventures/Create
         public async Task<IActionResult> Create()
         {
-            var user = await GetCurrentUserAsync();
+            //var user = await GetCurrentUserAsync();
 
-            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
+            //ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
             return View();
         }
 
@@ -65,10 +65,9 @@ namespace GoPlaces.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AdventureId,Title,Description,UserId,DateCreated,IsPublic")] Adventure adventure)
+        public async Task<IActionResult> Create(Adventure adventure)
         {
-            adventure.DateCreated = DateTime.Now;
-
+           // adventure.DateCreated = DateTime.Now;
                 _context.Adventures.Add(adventure);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

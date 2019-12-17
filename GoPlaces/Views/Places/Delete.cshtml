@@ -1,13 +1,14 @@
-﻿@model GoPlaces.Models.Adventure
+﻿@model GoPlaces.Models.Place
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Delete";
 }
 
-<h1>Details</h1>
+<h1>Delete</h1>
 
+<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Adventure</h4>
+    <h4>Place</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -23,27 +24,28 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.User)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.User.Id)
-        </dd>
-        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.DateCreated)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.DateCreated)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsPublic)
+            @Html.DisplayNameFor(model => model.Latitude)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsPublic)
+            @Html.DisplayFor(model => model.Latitude)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Longitude)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Longitude)
         </dd>
     </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.AdventureId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-    <a asp-action="Create" asp-controller="Places">Add New Place</a>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="PlaceId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
 </div>
