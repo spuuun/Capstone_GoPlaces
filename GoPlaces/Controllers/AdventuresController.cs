@@ -55,9 +55,9 @@ namespace GoPlaces.Controllers
         // GET: Adventures/Create
         public async Task<IActionResult> Create()
         {
-            //var user = await GetCurrentUserAsync();
+            var user = await GetCurrentUserAsync();
 
-            //ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
+            ViewData["UserId"] = user.Id;
             return View();
         }
 

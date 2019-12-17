@@ -81,7 +81,7 @@ namespace GoPlaces.Migrations
                     Title = table.Column<string>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false),
-                    DateCreated = table.Column<DateTime>(nullable: false),
+                    DateCreated = table.Column<DateTime>(nullable: false, defaultValueSql: "GETDATE()"),
                     IsPublic = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -189,7 +189,7 @@ namespace GoPlaces.Migrations
                     Title = table.Column<string>(maxLength: 55, nullable: false),
                     Description = table.Column<string>(maxLength: 250, nullable: true),
                     AdventureId = table.Column<int>(nullable: false),
-                    DateCreated = table.Column<DateTime>(nullable: false),
+                    DateCreated = table.Column<DateTime>(nullable: false, defaultValueSql: "GETDATE()"),
                     Latitude = table.Column<double>(nullable: false),
                     Longitude = table.Column<double>(nullable: false)
                 },
