@@ -44,8 +44,9 @@ namespace GoPlaces.Controllers
         }
 
         // GET: Places/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create(int adventureId)
         {
+            ViewData["AdventureId"] = adventureId;
             return View();
         }
 
@@ -54,7 +55,7 @@ namespace GoPlaces.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PlaceId,Title,Description,AdventureId,DateCreated,Latitude,Longitude")] Place place)
+        public async Task<IActionResult> Create(Place place, int adventureId)
         {
             if (ModelState.IsValid)
             {

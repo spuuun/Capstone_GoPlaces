@@ -33,6 +33,7 @@ namespace GoPlaces.Controllers
         }
 
         // GET: Adventures/Details/5
+        // first part of this view should be 2 buttons: 'add/check-into place' || 'see adventure deets'
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
