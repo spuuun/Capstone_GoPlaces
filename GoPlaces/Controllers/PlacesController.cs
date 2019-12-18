@@ -59,9 +59,10 @@ namespace GoPlaces.Controllers
         {
             if (ModelState.IsValid)
             {
+                var id = adventureId;
                 _context.Add(place);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Adventures", id);
             }
             return View(place);
         }

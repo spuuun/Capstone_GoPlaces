@@ -43,6 +43,7 @@ namespace GoPlaces.Controllers
 
             var adventure = await _context.Adventures
                 .Include(a => a.User)
+                .Include(a => a.Places)
                 .FirstOrDefaultAsync(m => m.AdventureId == id);
             if (adventure == null)
             {

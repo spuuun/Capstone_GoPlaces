@@ -27,11 +27,10 @@ namespace GoPlaces.Models
         [DataType(DataType.Date)]
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime DateCreated { get; set; }
-    
+
+        [Display(Name = "Public")]
         public bool IsPublic { get; set; }
 
         public List<Place> Places { get; set; }
-    
-    //LOCATION INFORMATION???
     }
 }
