@@ -1,8 +1,10 @@
 ﻿@model GoPlaces.Models.Adventure
-
 @{
     ViewData["Title"] = "Details";
 }
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@{var user = await UserManager.GetUserAsync(User);}
 
 <h1>Details</h1>
 
@@ -37,9 +39,16 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.AdventureId">Edit</a> |
-    <a asp-action="Index">Back to List</a> |
-    <a asp-action="Create" asp-route-adventureId="@Model.AdventureId" asp-controller="Places">Add New Place</a>
+    @{ if (user != null)
+        {
+            if (Model.UserId == user.Id)
+            {
+                <a asp-action="Edit" asp-route-id="@Model.AdventureId">Edit</a> <span>|</span>
+                <a asp-action="Create" asp-route-adventureId="@Model.AdventureId" asp-controller="Places">Add New Place</a> <span>|</span>
+            }
+        }
+    }
+    <a asp-controller="Adventures" asp-action="AllAdventuresIndex">Back to List</a>
 </div>
 <hr />
 <h3>Places on this Adventure</h3>
@@ -72,9 +81,16 @@
                     @Html.DisplayFor(modelItem => item.DateCreated)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-controller="Places" asp-route-id="@item.PlaceId">Edit</a> |
-                    <a asp-action="Details" asp-controller="Places" asp-route-id="@item.PlaceId">Details</a> |
-                    <a asp-action="Delete" asp-controller="Places" asp-route-id="@item.PlaceId">Delete</a>
+                    <a asp-action="Details" asp-controller="Places" asp-route-id="@item.PlaceId">Details</a>
+                    @{ if (user != null)
+                        {
+                            if (Model.UserId == user.Id)
+                            {
+                                <span>|</span> <a asp-action="Edit" asp-controller="Places" asp-route-id="@item.PlaceId">Edit</a> <span>|</span>
+                                <a asp-action="Delete" asp-controller="Places" asp-route-id="@item.PlaceId">Delete</a>
+                            }
+                        }
+                    }
                 </td>
             </tr>
         }

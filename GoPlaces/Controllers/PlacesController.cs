@@ -33,8 +33,7 @@ namespace GoPlaces.Controllers
                 return NotFound();
             }
 
-            var place = await _context.Places
-                .FirstOrDefaultAsync(m => m.PlaceId == id);
+            var place = await _context.Places.Include(p => p.Adventure).FirstOrDefaultAsync(m => m.PlaceId == id);
             if (place == null)
             {
                 return NotFound();
@@ -57,12 +56,13 @@ namespace GoPlaces.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Place place, int adventureId)
         {
+            ModelState.Remove("Longitude");
+            ModelState.Remove("Latitude");
             if (ModelState.IsValid)
             {
-                var id = adventureId;
-                _context.Add(place);
+                _context.Places.Add(place);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Details", "Adventures", id);
+                return RedirectToAction($"Details", "Adventures", new { Id = adventureId});
             }
             return View(place);
         }
@@ -126,8 +126,10 @@ namespace GoPlaces.Controllers
                 return NotFound();
             }
 
+
             var place = await _context.Places
                 .FirstOrDefaultAsync(m => m.PlaceId == id);
+            ViewData["AdventureId"] = place.AdventureId;
             if (place == null)
             {
                 return NotFound();
@@ -139,12 +141,12 @@ namespace GoPlaces.Controllers
         // POST: Places/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id, int adventureId)
         {
             var place = await _context.Places.FindAsync(id);
             _context.Places.Remove(place);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction($"Details", "Adventures", new { Id = adventureId });
         }
 
         private bool PlaceExists(int id)

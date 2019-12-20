@@ -25,10 +25,20 @@ namespace GoPlaces.Controllers
 
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
+        //GET: All Public Adventures
+        public async Task<IActionResult> AllAdventuresIndex()
+        {
+            var applicationDbContext = _context.Adventures.Where(a => a.IsPublic == true).Include(a => a.User).Include(a => a.Places);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+
         // GET: Adventures
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Adventures.Include(a => a.User).Include(a => a.Places);
+            var user = await GetCurrentUserAsync();
+
+            var applicationDbContext = _context.Adventures.Where(a => a.UserId == user.Id).Include(a => a.User).Include(a => a.Places);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -40,6 +50,8 @@ namespace GoPlaces.Controllers
             {
                 return NotFound();
             }
+            //var user = await GetCurrentUserAsync();
+            //ViewData["CurrentUserId"] = user.Id;
 
             var adventure = await _context.Adventures
                 .Include(a => a.User)
@@ -58,7 +70,7 @@ namespace GoPlaces.Controllers
         {
             var user = await GetCurrentUserAsync();
 
-            ViewData["UserId"] = user.Id;
+            ViewData["UserId"] = user?.Id;
             return View();
         }
 

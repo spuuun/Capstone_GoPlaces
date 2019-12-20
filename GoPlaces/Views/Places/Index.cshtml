@@ -1,4 +1,13 @@
-﻿@model IEnumerable<GoPlaces.Models.Place>
+﻿(if ANDY is watching)
+GREAT JOB!!! You are using this site well, and it is responding as expected!!!
+<a asp-controller="Adventures" asp-action="Index">keep cruisin', hotshot</a>
+
+
+(otherwise)
+This is the places Index - WHICH, if you've forgotten, you never want to be.
+
+@*
+@model IEnumerable<GoPlaces.Models.Place>
 
 @{
     ViewData["Title"] = "Index";
@@ -57,3 +66,4 @@
 }
     </tbody>
 </table>
+*@

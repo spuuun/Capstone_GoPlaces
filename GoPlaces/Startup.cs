@@ -63,7 +63,7 @@ namespace GoPlaces
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Adventures}/{action=AllAdventuresIndex}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

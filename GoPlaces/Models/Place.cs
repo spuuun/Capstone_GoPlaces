@@ -29,13 +29,14 @@ namespace GoPlaces.Models
         // AdventureId shouldn't be required if/when Users can access Places independently of Adventures
         [Required]
         public int AdventureId { get; set; }
+        public Adventure Adventure { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime DateCreated { get; set; }
 
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
+        public double? Latitude { get; set; }
+        public double? Longitude { get; set; }
     }
 }
