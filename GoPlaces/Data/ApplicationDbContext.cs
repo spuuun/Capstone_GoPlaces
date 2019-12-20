@@ -14,6 +14,20 @@ namespace GoPlaces.Data
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Place> Places { get; set; }
         public DbSet<Adventure> Adventures { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Place>()
+                .Property(b => b.DateCreated)
+                .HasDefaultValueSql("GETDATE()"); 
+            
+            modelBuilder.Entity<Adventure>()
+                .Property(b => b.DateCreated)
+                .HasDefaultValueSql("GETDATE()");
+        }
     }
 }
 
