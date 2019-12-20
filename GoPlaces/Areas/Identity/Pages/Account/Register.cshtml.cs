@@ -86,12 +86,13 @@ namespace GoPlaces.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { 
-                    UserName = Input.Email, 
+                var user = new ApplicationUser {
+                    UserName = Input.Email,
                     Email = Input.Email,
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
-                    UserHandle = Input.UserHandle
+                    UserHandle = Input.UserHandle,
+                    EmailConfirmed = true
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
