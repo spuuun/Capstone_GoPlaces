@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoPlaces.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191211161617_Initial1")]
-    partial class Initial1
+    [Migration("20191217203445_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,14 +23,15 @@ namespace GoPlaces.Migrations
 
             modelBuilder.Entity("GoPlaces.Models.Adventure", b =>
                 {
-                    b.Property<int>("PlaceId")
+                    b.Property<int>("AdventureId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -46,7 +47,7 @@ namespace GoPlaces.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("PlaceId");
+                    b.HasKey("AdventureId");
 
                     b.HasIndex("UserId");
 
@@ -147,7 +148,8 @@ namespace GoPlaces.Migrations
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(250)")
