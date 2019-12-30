@@ -7,15 +7,37 @@
 @inject UserManager<ApplicationUser> UserManager
 @{var user = await UserManager.GetUserAsync(User);}
 
-<h1>All Adventures Index</h1>
 
-<p>
-    @{ if (user != null)
-        {
-            <a asp-action="Create">Create New</a>
+@*
+    1. change page title/heading -- include cool background and center
+    2. change "create new" link to a cool styled button or something
+    3. change default list view to an array of Cards (see wireframes)
+        *how to make a whole card a link to the details page?
+        *make "Created By @Username" link to EITHER a list of all that user's adventures OR a link to that user's profile page
+
+
+*@
+
+<div style="background-color: darkgreen;">
+    <h1 style="color:cornsilk;">All Adventures</h1>
+
+    <p class="justify-content-center">
+        @{ if (user != null)
+            {
+                <a class="btn btn-primary" asp-action="Create">Create New</a>
+            }
         }
-    }
-</p>
+    </p>
+</div>
+
+@*4. add "Search people and places"*@
+<div class="input-group w-75 justify-content-center">
+    <input class="active-pink-3 ml-3 mr-3 w-50" type="text" name="SearchString" placeholder="search for people and places..." />
+    <button type="button" class="btn mr-1 btn-primary" role="search">
+        <i class="fa fa-search"></i>
+    </button>
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -57,3 +79,10 @@
         }
     </tbody>
 </table>
+
+<div class="card" style="width: 18rem;">
+    <img src="~/TestImages/Blake-Abel.jpg" class="card-img-top" alt="picture for this adventure">
+    <div class="card-body">
+        <p class="card-text">Here is where a preview of the adventure description will go</p>
+    </div>
+</div>
