@@ -32,12 +32,42 @@
 
 @*4. add "Search people and places"*@
 <div class="input-group w-75 justify-content-center">
-    <input class="active-pink-3 ml-3 mr-3 w-50" type="text" name="SearchString" placeholder="search for people and places..." />
+    <input class="active-pink-3 ml-3 mr-3 w-50 rounded" type="text" name="SearchString" placeholder="search for people and places..." />
     <button type="button" class="btn mr-1 btn-primary" role="search">
         <i class="fa fa-search"></i>
     </button>
 </div>
 
+<div class="adventure-cards-container card-group"> @*size this div AND flex flow the cards within*@
+    @foreach (var item in Model)
+    {
+        <a asp-action="Details" asp-route-id="@item.AdventureId">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
+                    <img src="~/TestImages/Blake-Abel.jpg" class="card-img-top" alt="picture for this adventure">
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
+                    <div class="card-footer">
+                        @* @{
+                            if (item.User.ProfileImage)
+                                {
+                                <img src="...wherever user profile imgs are" 
+                                    alt="profile photo for @HtmlDisplayFor(modelItem => item.User.UserHandle" 
+                                    class="rounded-circle w-25">
+                                }
+                            }
+                        *@
+                        <small>
+                            added by @Html.DisplayFor(modelItem => item.User.UserHandle) on @Html.DisplayFor(modelItem => item.DateCreated)
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </a>
+    }
+</div>
+
+@*
 <table class="table">
     <thead>
         <tr>
@@ -78,11 +108,5 @@
             </tr>
         }
     </tbody>
-</table>
-
-<div class="card" style="width: 18rem;">
-    <img src="~/TestImages/Blake-Abel.jpg" class="card-img-top" alt="picture for this adventure">
-    <div class="card-body">
-        <p class="card-text">Here is where a preview of the adventure description will go</p>
-    </div>
-</div>
+</table>    
+*@

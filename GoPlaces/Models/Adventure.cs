@@ -12,8 +12,6 @@ namespace GoPlaces.Models
         [Key]
         public int AdventureId { get; set; }
 
-        //public int? PlaceId { get; set; }
-
         [Required]
         public string Title { get; set; }
         public string Description { get; set; }
@@ -32,5 +30,11 @@ namespace GoPlaces.Models
         public bool IsPublic { get; set; }
 
         public List<Place> Places { get; set; }
+
+        // FOR LINK ON LOGIN PAGE: 'take me to my current adventure'
+        //public bool IsActive { get; set; }
+
+        // DIFFERENT THAN TITLE --- may improve UX, but not sure if it's necessary.
+        //public string LocationName { get; set; }
     }
 }
