@@ -28,14 +28,14 @@
                 <button class="btn btn-primary">Upload Photo</button>
             </div>
             <div class="form-group">
-                <input type="hidden" asp-for="AdventureId" class ="form-control" value="@ViewBag.AdventureId"></input>
+                <input type="hidden" asp-for="AdventureId" class="form-control" value="@ViewBag.AdventureId"></input>
             </div>
             <div class="form-group">
-                <input type="hidden" asp-for="Latitude" class="form-control" />
+                <input type="hidden" id="latitude" value="" asp-for="Latitude" class="form-control" />
                 <span asp-validation-for="Latitude" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="hidden" asp-for="Longitude" class="form-control" />
+                <input type="hidden" value="" id="longitude" asp-for="Longitude" class="form-control" />
                 <span asp-validation-for="Longitude" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -50,9 +50,28 @@
 </div>
 
 <script>
-    const onSubmit = document.querySelector("#submitCreatePlace").addEventListener("click", () => {
-        console.log("submit button clicked")
-    })
+    const Latitude = document.querySelector("#latitude")
+    const Longitude = document.querySelector("#longitude")
+
+    const options = {
+        enableHighAccuracy: true
+    }
+    const err = () => {
+        console.log("error")
+    }
+
+    const CurrentUserCurrentLocation = () => {
+        navigator.geolocation.getCurrentPosition((pos, ) => {
+            const coords = pos.coords
+            Latitude.value = coords.latitude
+            Longitude.value = coords.longitude
+            console.log("coords", coords)
+        }, err, options)
+    }
+
+    CurrentUserCurrentLocation();
+
+    console.log("currentUserCurrentLocation", CurrentUserCurrentLocation)
 </script>
 
 @section Scripts {

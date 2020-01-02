@@ -56,8 +56,8 @@ namespace GoPlaces.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Place place, int adventureId)
         {
-            ModelState.Remove("Longitude");
-            ModelState.Remove("Latitude");
+            //ModelState.Remove("Longitude");
+            //ModelState.Remove("Latitude");
             if (ModelState.IsValid)
             {
                 _context.Places.Add(place);

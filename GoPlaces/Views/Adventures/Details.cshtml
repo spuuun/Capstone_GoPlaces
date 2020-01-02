@@ -49,8 +49,6 @@
         }
     }
 
-    <button class="btn btn-primary" id="add-place">Test Geolocation</button>
-
     <a asp-controller="Adventures" asp-action="AllAdventuresIndex">Back to List</a>
 </div>
 <hr />
@@ -100,28 +98,5 @@
     </tbody>
 </table>
 
-    <script>
 
-        const AddButton = document.querySelector("#add-place")
-
-        const options = {
-            enableHighAccuracy: true
-        }
-        const err = () => {
-            console.log("error")
-        }
-
-        AddButton.addEventListener("click", () => {
-            const CurrentUserCurrentLocation = navigator.geolocation.getCurrentPosition((pos,) => {
-                const coords = pos.coords
-                const latitude = coords.latitude
-                const longitude = coords.logitude
-                console.log("goords", coords)
-                return coords
-            }, err, options)
-
-            console.log(CurrentUserCurrentLocation)
-        })
-
-    </script>
 
