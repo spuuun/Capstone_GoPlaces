@@ -7,6 +7,18 @@
 @inject UserManager<ApplicationUser> UserManager
 @{var user = await UserManager.GetUserAsync(User);}
 
+<style>
+    .adventure-card.adventure-card-link {
+        color: darkgreen;
+        text-decoration: none;
+    }
+
+    .adventure-card.adventure-card-link:hover {
+        color: #0056b3;
+        text-decoration: none;
+    }
+</style>
+
 <div style="background-color: darkgreen;">
     <h1 style="color:cornsilk;">All Adventures</h1>
 
@@ -20,17 +32,19 @@
 </div>
 
 @*4. add "Search people and places"*@
-<div class="input-group w-75 justify-content-center mx-auto">
-    <input class="active-pink-3 ml-3 mr-3 w-50 rounded" type="text" name="SearchString" placeholder="search for people and places..." />
-    <button type="button" class="btn mr-1 btn-primary" role="search">
-        <i class="fa fa-search"></i>
-    </button>
-</div>
+<form asp-action="AllAdventuresIndex">
+    <div class="input-group w-75 justify-content-center mx-auto">
+        <input class="active ml-3 mr-3 w-50 rounded" type="text" name="searchString" placeholder="search for people and adventures..." />
+        <button type="submit" class="btn mr-1 btn-primary" role="search">
+            <i class="fa fa-search"></i>
+        </button>
+    </div>
+</form>
 
 <div class="adventure-cards-container card-deck d-flex justify-content-around"> 
     @foreach (var item in Model)
     {
-        <a asp-action="Details" asp-route-id="@item.AdventureId">
+        <a class="adventure-card adventure-card-link" asp-action="Details" asp-route-id="@item.AdventureId">
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>

@@ -26,9 +26,15 @@ namespace GoPlaces.Controllers
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         //GET: All Public Adventures
-        public async Task<IActionResult> AllAdventuresIndex()
+        public async Task<IActionResult> AllAdventuresIndex(string searchString)
         {
             var applicationDbContext = _context.Adventures.Where(a => a.IsPublic == true).Include(a => a.User).Include(a => a.Places);
+
+            if (searchString != null)
+            {
+                applicationDbContext = _context.Adventures.Where(a => a.IsPublic == true && (a.Title.ToLower().Contains(searchString.ToLower()) || a.User.UserHandle.ToLower().Contains(searchString.ToLower()))).Include(a => a.User).Include(a => a.Places);
+            }
+
             return View(await applicationDbContext.ToListAsync());
         }
 

@@ -13,7 +13,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using GoPlaces.Models;
-
+// GoogleMaps API KEY
+// AIzaSyAr1ZC8BUTXIDEDe3ppbKf_8cfDSYLAc5Y
 namespace GoPlaces
 {
     public class Startup
