@@ -13,12 +13,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using GoPlaces.Models;
-// GoogleMaps API KEY
-// AIzaSyAr1ZC8BUTXIDEDe3ppbKf_8cfDSYLAc5Y
 namespace GoPlaces
 {
     public class Startup
     {
+        private string _SecretApiKey = null;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -36,6 +35,7 @@ namespace GoPlaces
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            _SecretApiKey = Configuration["SecretValues:SecretApiKey"];
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

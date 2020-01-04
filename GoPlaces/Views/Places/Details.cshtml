@@ -1,7 +1,11 @@
 ﻿@model GoPlaces.Models.Place
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr1ZC8BUTXIDEDe3ppbKf_8cfDSYLAc5Y&callback=initMap">
-</script>
+@using Microsoft.Extensions.Configuration;
+@inject IConfiguration Configuration
+@{
+    var APIKey = @Configuration["SecretValues:SecretApiKey"];
+    var APIEndpointUrl = $"https://maps.googleapis.com/maps/api/js?key={APIKey}&callback=initMap";
+}
+<script async defer src=@APIEndpointUrl></script>
 <style>
     /* Set the size of the div element that contains the map */
     #map {
@@ -17,7 +21,6 @@
 @{var user = await UserManager.GetUserAsync(User);}
 
 <h1>Details</h1>
-
 <div>
     <h4>Place</h4>
     <hr />
@@ -83,13 +86,4 @@
             });
             var marker = new google.maps.Marker({position: place, map: map});
         }
-
-    console.log(map);
 </script>
-
-
-    @*@{
-        var sourceString = $"https://maps.googleapis.com/maps/api/staticmap?center={Model.Latitude},{Model.Longitude}&zoom=13&size=600x300&key=AIzaSyAr1ZC8BUTXIDEDe3ppbKf_8cfDSYLAc5Y";
-    }
-    <h3>google map in image</h3>
-    <img src=@sourceString />*@
