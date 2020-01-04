@@ -14,6 +14,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace GoPlaces.Areas.Identity.Pages.Account
 {
@@ -24,17 +27,20 @@ namespace GoPlaces.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IWebHostEnvironment _hostingEnvironment;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IWebHostEnvironment hostingEnvironment)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         [BindProperty]
@@ -72,6 +78,8 @@ namespace GoPlaces.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            public IFormFile ProfilePicture { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -80,20 +88,42 @@ namespace GoPlaces.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
+        private string GetUniqueFileName(string fileName)
+        {
+            fileName = Path.GetFileName(fileName);
+            return Path.GetFileNameWithoutExtension(fileName)
+                      + "_"
+                      + Guid.NewGuid().ToString().Substring(0, 4)
+                      + Path.GetExtension(fileName);
+        }
+
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            var ProfilePicture = Input.ProfilePicture;
+            var fileName = Path.GetFileName(Input.ProfilePicture.FileName);
+            var contentType = Input.ProfilePicture.ContentType;
+
+            var uniqueFileName = GetUniqueFileName(Input.ProfilePicture.FileName);
+            var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
+            var filePath = Path.Combine(uploads, uniqueFileName);
+            Input.ProfilePicture.CopyTo(new FileStream(filePath, FileMode.Create));
+
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser {
+                var user = new ApplicationUser
+                {
                     UserName = Input.Email,
                     Email = Input.Email,
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
                     UserHandle = Input.UserHandle,
-                    EmailConfirmed = true
+                    EmailConfirmed = true,
+                    ProfilePictureImagePath = uniqueFileName
                 };
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 /*
@@ -122,8 +152,8 @@ namespace GoPlaces.Areas.Identity.Pages.Account
                     //}
                     //else
                     //{
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return LocalRedirect(returnUrl);
                     //}
                 }
                 foreach (var error in result.Errors)

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -32,6 +33,10 @@ namespace GoPlaces.Models
         [Display(Name ="User Handle")]
         public string UserHandle { get; set; }
         public ICollection<Adventure> Adventures { get; set; }
+
+        public string ProfilePictureImagePath { get; set; }
+        
+        // will likely refactor --- removing following prop and adding IsActive prop to Adventure.cs
         public bool ShouldGoToLatestAdventure { get; set; }
     }
 }

@@ -13,10 +13,10 @@
         text-decoration: none;
     }
 
-    .adventure-card.adventure-card-link:hover {
-        color: #0056b3;
-        text-decoration: none;
-    }
+        .adventure-card.adventure-card-link:hover {
+            color: #0056b3;
+            text-decoration: none;
+        }
 </style>
 
 <div style="background-color: darkgreen;">
@@ -41,7 +41,7 @@
     </div>
 </form>
 
-<div class="adventure-cards-container card-deck d-flex justify-content-around"> 
+<div class="adventure-cards-container card-deck d-flex justify-content-around">
     @foreach (var item in Model)
     {
         <a class="adventure-card adventure-card-link" asp-action="Details" asp-route-id="@item.AdventureId">
@@ -51,15 +51,15 @@
                     <img src="~/TestImages/Blake-Abel.jpg" class="card-img-top" alt="picture for this adventure">
                     <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
                     <div class="card-footer">
-                        @* @{
-                            if (item.User.ProfileImage)
-                                {
-                                <img src="...wherever user profile imgs are" 
-                                    alt="profile photo for @HtmlDisplayFor(modelItem => item.User.UserHandle" 
-                                    class="rounded-circle w-25">
-                                }
+                        @{
+                            if (item.User.ProfilePictureImagePath != null)
+                            {
+                                <img src="~/uploads/@item.User.ProfilePictureImagePath"
+                                     alt="profile photo for @item.User.UserHandle"
+                                     class="rounded-circle w-25" />
                             }
-                        *@
+                        }
+
                         <small>
                             added by @Html.DisplayFor(modelItem => item.User.UserHandle) on @Html.DisplayFor(modelItem => item.DateCreated)
                         </small>
