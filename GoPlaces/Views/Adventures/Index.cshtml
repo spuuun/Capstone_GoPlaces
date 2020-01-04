@@ -4,7 +4,18 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<style>
+    td > a {
+        text-decoration: none;
+            color: #212529;
+    }
+    td > a:hover {
+        color:#0366d6;
+        text-decoration: underline;
+    }
+</style>
+
+<h1>MY ADVENTURES</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -21,33 +32,49 @@
             <th>
                 @Html.DisplayNameFor(model => model.DateCreated)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsPublic)
-            </th>
+            <th></th>
+            <th></th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateCreated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsPublic)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.AdventureId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.AdventureId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.AdventureId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.AdventureId">
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.AdventureId">
+
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.AdventureId">
+
+                        @Html.DisplayFor(modelItem => item.DateCreated)
+                    </a>
+                </td>
+                <td>
+                    @{
+                        if (item.IsPublic)
+                        {
+                            <p style="background-color: darkgreen; color: cornsilk;">Public</p>
+                        }
+                        else
+                        {
+                            <p style="background-color: darkred; color: cornsilk;">Private</p>
+                        }
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.AdventureId"><i class="fa fa-wrench"></i></a> |
+                    <a asp-action="Delete" asp-route-id="@item.AdventureId"><i class="fa fa-close"></i></a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
