@@ -111,7 +111,7 @@ namespace GoPlaces.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Adventures", new {Id = place.AdventureId });
             }
             return View(place);
         }

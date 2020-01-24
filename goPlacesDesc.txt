@@ -1,0 +1,18 @@
+I worked with 3 other teammates to create
+an itinerary-building web application. Myself
+and the group made use of data retrieved
+from 4 external API's, and exposed that
+data to the end-user in a searchable format.
+I was responsible for retrieving and parsing
+data regarding events and meetups from
+Eventbrite's APIThe user is able to view
+their search results and add items to their
+itinerary, which is also displayed. The group
+also used json-server for persistent data
+storage, Git and GitHub to manage
+workflow, and JavaScript/HTML5/CSS to
+create and style our webpage.
+
+Go Places is a web application for adventurers. Whether you prefer to travel a little more off the map, or are looking for more local gems/ finer detail. 
+Go Places, unlike the hoardes on hoardes of trip-planners and itenerary builders littering the WWW, helps users track the places they're exploring in real time.
+When you have an experience, or find a dope spot -- simply add a new place to your adventure map. Add a detaied description right there, or add one later. You can publish your adventures for your friends to enjoy or reference; or you can keep them private --- use the adventure as a sort of digital scrapbook.
